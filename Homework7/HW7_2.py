@@ -23,61 +23,51 @@
 
 # Здесь пишем код
 class PersonInfo:
-    def __init__(self, name, age, *departmen: str):
+    INDEXATION_CONST = 1337
+    def __init__(self, name, age, *department: str):
         """
         Инициализация сотрудника
         :param name: Имя
         :param age: Возраст
-        :param departmen: Отдел
+        :param department: Отдел
         """
         self.name = name
         self.age = age
-        self.departmen = departmen
+        self.department = department
 
     def short_name(self):
         """
         Возвращает строку Фамилия И.
         :return: Фамилия И.
         """
-        name = self.name.split()
-        return f'{name[1]} {name[0][:1]}.'
+        first_name, second_name = self.name.split()
+        return f'{second_name} {first_name[0]}.'
 
     def path_deps(self):
         """
         Возвращает путь "Головное подразделение --> ... --> Конечное подразделение"
         :return: "Головное подразделение --> ... --> Конечное подразделение"
         """
-        path = ''
-        for dep in range(len(self.departmen)):
-            path += self.departmen[dep]
-            if dep != len(self.departmen) - 1:
-                path += ' --> '
-        return path
+        return ' --> '.join(self.department)
 
     def new_salary(self):
         """
-        Новая ЗП по очень странной формуле 1337*Возраст*суммарное кол-во вхождений трех наиболее часто встречающихся букв из списка подразделений
+        Новая ЗП по очень странной формуле 1337*Возраст*суммарное кол-во вхождений
+        трех наиболее часто встречающихся букв из списка подразделений
         :return: новая ЗП
         """
         new_dict = {}
-        new_str = ''
-        for word in self.departmen:
-            new_str += word
+        max_chars_sum = 0
+        for char in ''.join(self.department):
+            if char in new_dict:
+                new_dict[char] += 1
+            else:
+                new_dict[char] = 1
+        for i in range(3):
+            max_chars_sum += new_dict.pop(max(new_dict, key=new_dict.get))
+        return PersonInfo.INDEXATION_CONST * self.age * max_chars_sum
 
-        for letter in new_str:
-            new_dict.setdefault(letter, new_str.count(letter))
 
-        max_letters_lst = []
-        super_new_dict = new_dict.copy()
-        while len(max_letters_lst) < 3:
-            for key, value in super_new_dict.items():
-                if value == max(super_new_dict.values()):
-                    max_letters_lst.append(value)
-                    super_new_dict[key] = 0
-                    break
-
-        formula = 1337 * self.age * sum(max_letters_lst)
-        return formula
 # Ниже НИЧЕГО НЕ НАДО ИЗМЕНЯТЬ
 
 

@@ -10,31 +10,32 @@
 # Segment((-2, -3), (4, -5)).y_axis_intersection() --> False
 
 class Segment:
-    def __init__(self, koordin1, koordin2):
+    def __init__(self, point1, point2):
         """
         Инициализация отрезка
-        :param koordin1: координаты первой точки
-        :param koordin2: координаты второй точки
+        :param point1: координаты первой точки
+        :param point2: координаты второй точки
         """
-        self.koordin1 = koordin1
-        self.koordin2 = koordin2
+        self.point1 = point1
+        self.point2 = point2
 
     def length(self):
         """
         Длинна отрезка
         :return: длинна с округлением до двух знаков после запятой
         """
-        x1, y1 = self.koordin1
-        x2, y2 = self.koordin2
-        return round(pow(((x2-x1)**2 + (y2-y1)**2), 0.5), 2)
+        x1, y1 = self.point1
+        x2, y2 = self.point2
+        lenght = pow(((x2-x1)**2 + (y2-y1)**2), 0.5)
+        return round(lenght, 2)
 
     def x_axis_intersection(self):
         """
         Возвращает True, если отрезок пересекает ось абцисс, иначе False
         :return: True / False
         """
-        x1, y1 = self.koordin1
-        x2, y2 = self.koordin2
+        x1, y1 = self.point1
+        x2, y2 = self.point2
         return y1 * y2 <= 0
 
     def y_axis_intersection(self):
@@ -42,8 +43,8 @@ class Segment:
         Возвращает True, если отрезок пересекает ось ординат, иначе False
         :return: True / False
         """
-        x1, y1 = self.koordin1
-        x2, y2 = self.koordin2
+        x1, y1 = self.point1
+        x2, y2 = self.point2
         return x1 * x2 <= 0
 
 
