@@ -19,7 +19,7 @@ import unittest  # Не удалять
 # Здесь пишем код
 
 
-def treatment_sum(our_tuple):
+def treatment_sum(our_tuple: tuple):
     """
     Функция складывает два элемента кортежа
     :param our_tuple: кортеж
@@ -30,8 +30,7 @@ def treatment_sum(our_tuple):
     except TypeError:
         return "Нельзя сложить эти данные"
     except IndexError:
-        if len(our_tuple) < 3:
-            return "Недостаточно данных"
+        return "Недостаточно данных"
     finally:
         if len(our_tuple) > 2:
             raise Exception("Много данных")

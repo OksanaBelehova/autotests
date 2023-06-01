@@ -24,24 +24,19 @@ class Trigon:
         Функция по трем точкам проверяет треугольник ли у нас
         :param args: координаты
         """
-        if len(args) != 3:
-            raise IndexError(f'Передано {len(args)} аргументов, а ожидается 3')
-
-            args = list(args)
-        try:
-            for arg in args:
-                if type(arg) != int:
-                    raise TypeError("Стороны должны быть числами")
-                if arg <= 0:
-                    raise ValueError('Стороны должны быть положительными')
-                if args[0] <= abs(args[1] - args[2]):
-                    raise Exception('Не треугольник')
-        except TypeError:
-            raise TypeError('Стороны должны быть числами')
-        except ValueError:
+        self.args = args
+        if len(self.args) != 3:
+            raise IndexError(f'Передано {len(self.args)} аргументов, а ожидается 3')
+        self.a = args[0]
+        self.b = args[1]
+        self.c = args[2]
+        if not isinstance(self.a, int) or not isinstance(self.b, int) or not isinstance(self.c, int):
+            raise TypeError("Стороны должны быть числами")
+        elif self.a <= 0 or self.b <= 0 or self.c <= 0:
             raise ValueError('Стороны должны быть положительными')
-        except Exception:
+        elif not self.a + self.b > self.c and self.b + self.c > self.a and self.c + self.a > self.b:
             raise Exception('Не треугольник')
+
 # Ниже НИЧЕГО НЕ НАДО ИЗМЕНЯТЬ
 
 
