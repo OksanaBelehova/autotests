@@ -25,15 +25,15 @@ try:
     sleep(1)
     password = driver.find_element(By.CSS_SELECTOR, '[name="Password"]')
     password.send_keys(user_password, Keys.ENTER), 'Пароль не подходит'
-    sleep(1)
+    sleep(2)
     assert driver.current_url == sbis_site, 'Неверный url в адресной строке'
-    sleep(1)
+    sleep(2)
 
     # Переходим в Контакты
     contacts_for_first_click = driver.find_element(By.CSS_SELECTOR, '[data-qa="NavigationPanels-Accordion__title"].NavigationPanels-Accordion__title.NavigationPanels-Accordion__title_level-1')
     assert contacts_for_first_click.is_displayed(), 'Нет вкладки контакты'
     action_chains = ActionChains(driver)
-    sleep(1)
+    sleep(2)
     action_chains.click(contacts_for_first_click)
     action_chains.perform()
     sleep(1)
