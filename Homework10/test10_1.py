@@ -16,19 +16,14 @@
 import random
 import string
 
-
-def generate_string():
-    letters = string.ascii_lowercase
-    word1 = "".join(random.choice(letters) for _ in range(0, random.randint(1, 15)))
-    word2 = "".join(random.choice(letters) for _ in range(0, random.randint(1, 15)))
-    return f"{word1} {word2}"
+letters = string.ascii_lowercase
 
 
 def generate_random_name():
-    word = generate_string()
     while True:
-        yield word
-        word = generate_string()
+        word1 = "".join(random.choice(letters) for i in range(random.randint(1, 15)))
+        word2 = "".join(random.choice(letters) for i in range(random.randint(1, 15)))
+        yield f"{word1} {word2}"
 
 
 gen = generate_random_name()
